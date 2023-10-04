@@ -15,10 +15,39 @@
     </main>
 
     <script>
-    (async function() {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Configure the request
+        xhr.open('GET', 'api/message', true);
+
+        // Set up an event handler to handle the response
+        xhr.onload = function () {
+          // Check if the request was successful (status code 200)
+          if (xhr.status === 200) {
+            // Parse the response as a string and log it to the console
+            console.log(xhr.responseText);
+            document.querySelector('#name').textContent = text;
+          } else {
+            // Handle errors or non-200 status codes here
+            console.error('Request failed with status:', xhr.status);
+          }
+        };
+
+        // Set up an event handler to handle network errors
+        xhr.onerror = function () {
+          console.error('Network error occurred');
+        };
+
+        // Send the request
+        xhr.send();
+
+
+      
+    <!-- (async function() {
         const { text } = await( await fetch(`/api/message`)).json();
         document.querySelector('#name').textContent = text;
-    }());
+    }()); -->
     </script>
 </body>
 
