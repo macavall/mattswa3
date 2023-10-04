@@ -29,7 +29,7 @@
                   if (xhr.status === 200) {
                     // Parse the response as a string and log it to the console
                     console.log(xhr.responseText);
-                    document.querySelector('#name').textContent = text;
+                    document.querySelector('#name').textContent = xhr.responseText;
                   } else {
                     // Handle errors or non-200 status codes here
                     console.error('Request failed with status:', xhr.status);
