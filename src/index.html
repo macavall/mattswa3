@@ -29,7 +29,7 @@
                     }
 
                     if (xhr.status === 200) {
-                        const { text } = xhr.responseText;
+                        const { text } = JSON.parse(xhr.responseText);
                         document.querySelector('#name').textContent = text;
                     } else {
                         document.querySelector('#name').textContent = 'Error fetching data';
