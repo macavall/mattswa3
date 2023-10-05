@@ -1,23 +1,23 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
+using System.Net;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
-namespace Company.Function
+namespace net7iso
 {
-    public static class message
+    public class http1
     {
-        [FunctionName("message")]
-        public static async Task<string> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+        private readonly ILogger _logger;
+
+        public http1(ILoggerFactory loggerFactory)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            _logger = loggerFactory.CreateLogger<http1>();
+        }
+
+        [Function("http1")]
+        public string Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             System.Threading.Thread.Sleep(20000);
 
