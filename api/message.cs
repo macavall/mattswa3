@@ -19,6 +19,8 @@ namespace Company.Function
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
+            System.Threading.Thread.Sleep(20000);
+
             return "COMPLETED THE CONNECTION";
         }
     }
