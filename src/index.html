@@ -22,20 +22,19 @@
             const timeout = 10000; // 10 seconds
             let timedOut = false;
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (timedOut) {
-                        return; // If it's already timed out, do nothing
-                    }
-
-                    if (xhr.status === 200) {
-                        const { text } = xhr.responseText;
-                        document.querySelector('#name').textContent = text;
-                    } else {
-                        document.querySelector('#name').textContent = 'Error fetching data';
-                    }
+            xhr.addEventListener('load', function() {
+                if (timedOut) {
+                    return; // If it's already timed out, do nothing
                 }
-            };
+
+                if (xhr.status === 200) {
+                    const responseText = xhr.responseText;
+                    console.log('Response received:', responseText);
+                    document.querySelector('#name').textContent = responseText;
+                } else {
+                    document.querySelector('#name').textContent = 'Error fetching data';
+                }
+            });
 
             xhr.open('GET', '/api/message', true);
             xhr.send();
